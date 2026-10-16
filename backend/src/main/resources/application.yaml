@@ -1,0 +1,37 @@
+
+spring:
+  application:
+    name: supply-chain-sentinel
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5434/supply_chain}
+    username: ${DB_USERNAME:supply_user}
+    password: ${DB_PASSWORD:local_dev_password}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      connection-init-sql: "SET TIME ZONE 'Asia/Kolkata'"
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          time_zone: UTC
+
+  flyway:
+    enabled: true
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never
